@@ -1,0 +1,5 @@
+@media (width >= 510px) and (width < 640px) {
+  .hero-hedding {
+    font-size: 47px;
+  }
+}
