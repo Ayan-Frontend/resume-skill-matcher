@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CommonHeading from "../CommonComponents/CommonHeading";
 import Results from "./ShowResult/Results";
+import SkillShowcase from "./ShowResult/SkillShowcase";
 import Seperater from "../CommonComponents/Seperater";
 
 const ResumeMatch = () => {
@@ -127,6 +128,7 @@ const ResumeMatch = () => {
       </div>
       <Seperater width={45} />
       <Results />
+      <SkillShowcase />
     </section>
   );
 };
