@@ -125,7 +125,7 @@ const ResumeMatch = () => {
           </div>
         </div>
       </div>
-      <Seperater width={35} />
+      <Seperater width={45} />
       <Results />
     </section>
   );
