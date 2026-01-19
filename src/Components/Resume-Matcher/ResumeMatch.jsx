@@ -3,6 +3,7 @@ import CommonHeading from "../CommonComponents/CommonHeading";
 import Results from "./ShowResult/Results";
 import SkillShowcase from "./ShowResult/SkillShowcase";
 import Seperater from "../CommonComponents/Seperater";
+import Visualization from "./ShowResult/Visualization";
 
 const ResumeMatch = () => {
   const [file, setFile] = useState(null);
@@ -129,6 +130,7 @@ const ResumeMatch = () => {
       <Seperater width={45} />
       <Results />
       <SkillShowcase />
+      <Visualization />
     </section>
   );
 };
