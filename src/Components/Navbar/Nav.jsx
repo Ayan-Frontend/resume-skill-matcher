@@ -25,7 +25,7 @@ const Nav = ({ isMenuOpen, setIsMenuOpen }) => {
       id: 3,
       name: "how it's work?",
       icon: <MdWorkOutline />,
-      navigate: "#home",
+      navigate: "#howItWork",
     },
   ];
   return (
