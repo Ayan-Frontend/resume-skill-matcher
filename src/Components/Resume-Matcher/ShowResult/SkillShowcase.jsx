@@ -15,12 +15,14 @@ const skillShowcase = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="w-full xl:w-[70%] mt-14 mb-8 capitalize flex flex-col md:flex-row justify-around ">
+      <div className="w-full xl:w-[70%] mt-10 mb-8 md:mb-10 capitalize flex flex-col md:flex-row justify-around ">
         {skillsBreakdown.map((skill, idx) => (
           <>
-            <div key={idx} className="flex px-8">
-              <div>
-                <h3 className="text-3xl pb-3 mb-5 font-bold">{skill.title}</h3>
+            <div key={idx} className="sm:mx-5 md:mx-0 md:flex px-8">
+              <div className={`${skill.id === 2 ? "mt-10 md:mt-0" : ""} `}>
+                <h3 className="text-3xl pb-3 mb-3 md:mb-5 font-bold">
+                  {skill.title}
+                </h3>
                 <ul>
                   {skill.lists.map((list, index) => (
                     <li key={index}>
