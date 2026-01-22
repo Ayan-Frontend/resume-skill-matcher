@@ -103,6 +103,10 @@ const Nav = ({ isMenuOpen, setIsMenuOpen }) => {
                 >
                   <a
                     href={list.navigate}
+                    onClick={() => {
+                      setOpen(!open);
+                      setIsMenuOpen(!isMenuOpen);
+                    }}
                     className="flex items-center justify-center"
                   >
                     <span className="mr-3 text-blue-500 group-hover:text-black">
