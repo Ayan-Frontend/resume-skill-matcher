@@ -3,6 +3,7 @@ import Home from "./Components/Home/Home";
 import Nav from "./Components/Navbar/Nav";
 import ResumeMatch from "./Components/Resume-Matcher/ResumeMatch";
 import Working from "./Components/HowItWork/Working";
+import Footer from "./Components/Footer/Footer";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,6 +15,7 @@ const App = () => {
         <ResumeMatch />
         <Working />
       </div>
+      <Footer />
     </>
   );
 };
