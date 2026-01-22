@@ -2,7 +2,7 @@ const Visualization = () => {
   return (
     <div>
       <div className="capitalize text-center">
-        <h2 className="mt-7 sm:mt-10 md:mt-8 lg:mt-10 mb-1 text-3xl md:text-4xl lg:text-5xl font-extrabold text-blue-500 ">
+        <h2 className="mt-5 sm:mt-10 md:mt-8 lg:mt-10 mb-1 text-3xl md:text-4xl lg:text-5xl font-extrabold text-blue-500 ">
           skills Visualization
         </h2>
         <p className="mb-3 font-semibold text-[18px] md:text-xl lg:text-2xl">
