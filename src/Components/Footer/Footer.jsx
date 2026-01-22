@@ -47,7 +47,7 @@ const Footer = () => {
                   {item.list.map((text, i) => (
                     <React.Fragment key={i}>
                       {obj.id === 1 ? (
-                        <span className="block my-2 font-semibold text-lg md:text-[22px] xl:text-lg text-slate-700">
+                        <span className="block my-2 font-semibold text-xl md:text-[22px] xl:text-lg text-slate-700">
                           {text}
                         </span>
                       ) : (
@@ -55,7 +55,7 @@ const Footer = () => {
                           href={item.hrefs[i]}
                           target={obj.id === 3 ? "_blank" : undefined}
                           rel="noreferrer"
-                          className="block my-2 font-semibold text-lg md:text-[22px] xl:text-lg text-slate-700 hover:text-slate-500 cursor-pointer"
+                          className="block my-2 font-semibold text-xl md:text-[22px] xl:text-lg text-slate-700 hover:text-slate-500 cursor-pointer"
                         >
                           {text}
                         </a>
@@ -70,9 +70,13 @@ const Footer = () => {
         <div className="mt-10 flex justify-center border-t border-slate-400">
           <p className="text-center font-semibold md:text-lg xl:text-[16px] text-slate-800 pt-4 ">
             <span className="text-[#E55E51]">© 2026</span> Ayan Alam{" "}
-            <span className="text-[#E55E51]">|</span> Built with{" "}
-            <span className="text-[#E55E51]">React</span> +{" "}
-            <span className="text-[#E55E51]">Tailwind CSS</span>
+            <span className="text-[#E55E51] hidden sm:inline-block mx-3">
+              |
+            </span>{" "}
+            <span className="mt-1 sm:mt-0 block sm:inline-block">
+              Built with <span className="text-[#E55E51]">React</span> +{" "}
+              <span className="text-[#E55E51]">Tailwind CSS</span>
+            </span>
           </p>
         </div>
       </div>
