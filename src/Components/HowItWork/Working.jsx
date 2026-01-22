@@ -1,3 +1,5 @@
+import CommonHeading from "../CommonComponents/CommonHeading";
+
 const Working = () => {
   const workingCard = [
     {
@@ -30,9 +32,11 @@ const Working = () => {
     <section id="howItWork" className="mt-16 mb-8">
       <div>
         <div>
-          <h2 className="mt-2 text-3xl md:text-4xl font-extrabold text-gray-900">
-            How the <span className="text-blue-500">Matcher Works ?</span>
-          </h2>
+          <CommonHeading
+            sec={"matcher"}
+            heading={["How the", "Matcher Works ?"]}
+          />
+
           <p className="mt-2 text-lg text-gray-600">
             Upload your resume, paste a job description, and instantly see how
             well your skills match the role.
