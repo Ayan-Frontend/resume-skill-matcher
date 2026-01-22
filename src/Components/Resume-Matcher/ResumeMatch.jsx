@@ -124,7 +124,7 @@ const ResumeMatch = () => {
                 onChange={(e) => setJobDesc(e.target.value)}
                 placeholder="Paste the job description here... (skills, requirements, tools, frameworks)"
                 rows={7}
-                className="w-full resize-none rounded-xl border border-gray-300 bg-white p-3 text-sm text-gray-800 outline-none transition focus:border-black"
+                className="w-full resize-none rounded-xl border border-gray-300 bg-white p-3 text-gray-800 outline-none transition focus:border-black"
               />
 
               <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
