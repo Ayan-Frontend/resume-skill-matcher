@@ -66,6 +66,14 @@ const Working = () => {
             ))}
           </div>
         </div>
+        <div className="mt-18 pb-4 text-center">
+          <a
+            href="#resumeMatch"
+            className="bg-blue-500 text-white py-4 px-14 md:py-5 xl:py-4 md:px-18 xl:px-12 rounded-2xl text-2xl md:text-3xl xl:text-2xl font-bold"
+          >
+            Upload Resume
+          </a>
+        </div>
       </div>
     </section>
   );
