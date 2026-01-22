@@ -34,22 +34,22 @@ const Working = () => {
         <div>
           <CommonHeading
             sec={"matcher"}
-            heading={["How the", "Matcher Works ?"]}
+            heading={["How the", "Matcher Works"]}
           />
 
-          <p className="mt-2 text-lg text-gray-600">
+          <p className="text-lg text-gray-600">
             Upload your resume, paste a job description, and instantly see how
             well your skills match the role.
           </p>
         </div>
 
         <div className="flex">
-          <div className="mt-10 xl:mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-10 sm:mx-18 md:mx-0 xl:mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3 ">
             {/* Steps */}
             {workingCard.map((card) => (
               <div
                 key={card.id}
-                className="flex flex-col rounded-2xl border bg-white p-6 shadow-sm"
+                className="mb-5 md:mb-4 xl:mb-0 flex flex-col rounded-2xl border bg-white p-6 shadow-sm"
               >
                 <div className="flex min-h-40 items-center justify-center rounded-xl border border-dashed text-gray-500">
                   {card.img}
