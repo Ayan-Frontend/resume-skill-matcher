@@ -45,7 +45,7 @@ const ResumeMatch = () => {
 
           <div className="upload-section pt-8 flex flex-col xl:flex-row justify-evenly items-center">
             {/* LEFT IMAGE */}
-            <div className="hidden xl:block w-[32%] h-170">
+            <div className="hidden xl:block w-[32%] h-165">
               <img
                 src="/assets/hero-2.webp"
                 className="w-full h-full cursor-pointer rounded-2xl"
@@ -77,7 +77,7 @@ const ResumeMatch = () => {
 
               <label
                 htmlFor="resumeUpload"
-                className="mt-12 capitalize cursor-pointer py-4 px-11 text-3xl sm:text-3xl md:text-2xl lg:text-[28px] xl:text-2xl rounded-3xl transition-all duration-300 ease-in-out font-bold text-white bg-blue-500 hover:bg-blue-400"
+                className="mx-3 mt-12 capitalize cursor-pointer py-4 px-10 text-3xl sm:text-3xl md:text-2xl lg:text-[28px] xl:text-2xl rounded-3xl transition-all duration-300 ease-in-out font-bold text-white bg-blue-500 hover:bg-blue-400 text-center"
               >
                 click to upload
               </label>
@@ -153,7 +153,7 @@ const ResumeMatch = () => {
             <button
               disabled={!file || !jobDesc.trim()}
               onClick={() => setHasResult(true)}
-              className={`cursor-pointer mt-8 mb-6 py-5 px-18 sm:py-5 sm:px-18 md:py-5 md:px-16 lg:py-5 lg:px-18 xl:py-4 xl:px-16 text-2xl sm:text-2xl md:text-[26px] lg:text-3xl xl:text-xl font-bold shadow-lg rounded-2xl text-white transition-all duration-300
+              className={`cursor-pointer mt-8 py-5 px-18 sm:py-5 sm:px-18 md:py-5 md:px-16 lg:py-5 lg:px-18 xl:py-4 xl:px-16 text-2xl sm:text-2xl md:text-[26px] lg:text-3xl xl:text-xl font-bold shadow-lg rounded-2xl text-white transition-all duration-300
                   ${
                     file && jobDesc.trim()
                       ? "bg-blue-500 hover:bg-blue-400"
