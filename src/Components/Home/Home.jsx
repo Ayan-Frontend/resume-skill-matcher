@@ -7,7 +7,7 @@ const Home = ({ isMenuOpen }) => {
       <section id="home" className="mt-8">
         <div className="w-full flex flex-col xl:flex-row justify-between">
           <div className="xl:w-[58%] flex flex-col items-center">
-            <h1 className="hero-hedding mt-14 sm:mt-26 md:mt-32 xl:mt-22 text-center capitalize font-[Montserrat,Arial,sans-serif] font-bold text-[9.5vw] sm:text-5xl md:text-6xl xl:text-[44px]">
+            <h1 className="hero-hedding mt-14 sm:mt-26 md:mt-32 xl:mt-18 text-center capitalize font-[Montserrat,Arial,sans-serif] font-bold text-[9.5vw] sm:text-5xl md:text-6xl xl:text-[44px]">
               <span>
                 Analyze Your <div className="sm:mt-3 sm:pt-1 xl:hidden"></div>
                 <span className="text-blue-500 font-[Assistant,Arial,sans-serif] font-extrabold">
