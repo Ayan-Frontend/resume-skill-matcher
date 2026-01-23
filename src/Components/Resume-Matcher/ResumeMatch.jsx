@@ -2,11 +2,54 @@ import { useState } from "react";
 import CommonHeading from "../CommonComponents/CommonHeading";
 import Results from "./ShowResult/Results";
 import Seperater from "../CommonComponents/Seperater";
+import { useStore } from "../../Context/StoreContext";
 
+// ---------- Helpers (Smart Matching) ----------
+
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+const normalizeText = (text) => {
+  return text
+    .toLowerCase()
+    .replace(/[\n\r]+/g, " ")
+    .replace(/[^a-z0-9+#.\s-]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
+const hasSkill = (text, alias) => {
+  const escaped = escapeRegex(alias.toLowerCase());
+  const pattern = new RegExp(`(^|\\s)${escaped}(\\s|$)`, "i");
+  return pattern.test(text);
+};
+
+const extractSkillsSmart = (text, SKILL_DICTIONARY) => {
+  const cleanText = normalizeText(text);
+
+  const found = [];
+  for (const skill of SKILL_DICTIONARY) {
+    const matched = skill.aliases.some((alias) => hasSkill(cleanText, alias));
+    if (matched) found.push(skill.name);
+  }
+  return found;
+};
+
+// ---------- Component ----------
 const ResumeMatch = () => {
+  const { SKILL_DICTIONARY } = useStore();
+
   const [file, setFile] = useState(null);
-  const [hasResult, setHasResult] = useState(false);
+  // const [hasResult, setHasResult] = useState(false);
+  const [resumeText, setResumeText] = useState("");
   const [jobDesc, setJobDesc] = useState("");
+
+  const [matchedSkills, setMatchedSkills] = useState([]);
+  const [missingSkills, setMissingSkills] = useState([]);
+  const [score, setScore] = useState(0);
+
+  const [loading, setLoading] = useState(false);
+  const [hasResults, setHasResults] = useState(false);
+  const [error, setError] = useState("");
 
   // Drag events
   const handleDragOver = (e) => {
@@ -31,10 +74,55 @@ const ResumeMatch = () => {
   };
 
   // Click upload
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
     setFile(selectedFile);
+    setError("");
+    setHasResults(false);
+
+    if (!selectedFile.name.toLowerCase().endsWith(".txt")) {
+      setError("Upload only .txt resume file (PDF support later).");
+      return;
+    }
+
+    const text = await selectedFile.text();
+    setResumeText(text);
+  };
+
+  // Analyze resume [VS] JD
+  const handleAnalyze = () => {
+    setError("");
+
+    if (!resumeText.trim()) {
+      setError("Resume is empty. Please upload a valid resume.");
+      return;
+    }
+
+    if (!jobDesc.trim()) {
+      setError("Please paste the job description.");
+      return;
+    }
+
+    setLoading(true);
+
+    setTimeout(() => {
+      const resumeSkills = extractSkillsSmart(resumeText, SKILL_DICTIONARY);
+      const jdSkills = extractSkillsSmart(jobDesc, SKILL_DICTIONARY);
+
+      const matched = jdSkills.filter((s) => resumeSkills.includes(s));
+      const missing = jdSkills.filter((s) => !resumeSkills.includes(s));
+
+      const total = jdSkills.length || 1;
+      const calculatedScore = Math.round((matched.length / total) * 100);
+
+      setMatchedSkills(matched);
+      setMissingSkills(missing);
+      setScore(calculatedScore);
+
+      setHasResults(true);
+      setLoading(false);
+    }, 400);
   };
 
   return (
@@ -69,7 +157,7 @@ const ResumeMatch = () => {
               {/* Hidden input */}
               <input
                 type="file"
-                accept=".txt,.pdf"
+                accept=".txt"
                 id="resumeUpload"
                 className="hidden"
                 onChange={handleFileChange}
@@ -92,7 +180,7 @@ const ResumeMatch = () => {
                   </span>
                 </span>
                 <span className="absolute bottom-4 font-bold">
-                  .txt & .pdf Files are Allowed
+                  .txt Files are Allowed
                 </span>
               </p>
 
@@ -147,26 +235,31 @@ const ResumeMatch = () => {
               </div>
             </div>
           </div>
-
+          {error && (
+            <p className="mt-3 text-lg text-center font-medium text-red-500">
+              {error}
+            </p>
+          )}
           {/* Analyze Button */}
           <div className="text-center">
             <button
-              disabled={!file || !jobDesc.trim()}
-              onClick={() => setHasResult(true)}
+              // disabled={!file || !jobDesc.trim()}
+              disabled={!resumeText.trim() || !jobDesc.trim() || loading}
+              onClick={handleAnalyze}
               className={`cursor-pointer mt-8 py-5 px-18 sm:py-5 sm:px-18 md:py-5 md:px-16 lg:py-5 lg:px-18 xl:py-4 xl:px-16 text-2xl sm:text-2xl md:text-[26px] lg:text-3xl xl:text-xl font-bold shadow-lg rounded-2xl text-white transition-all duration-300
                   ${
-                    file && jobDesc.trim()
+                    resumeText.trim() && jobDesc.trim()
                       ? "bg-blue-500 hover:bg-blue-400"
                       : "bg-gray-400 cursor-not-allowed"
                   }
                 `}
             >
-              Analyze Resume
+              {loading ? "Analyzing..." : "Analyze Resume"}
             </button>
           </div>
         </div>
 
-        {!hasResult ? (
+        {!hasResults ? (
           <div className="mt-10 md:mt-12 mb-5 lg:mt-10 rounded-2xl border bg-white p-6 text-gray-500">
             <p className="text-center text-xl md:text-2xl">
               {!file
@@ -178,7 +271,12 @@ const ResumeMatch = () => {
           </div>
         ) : (
           <>
-            <Seperater width={45} /> <Results />
+            <Seperater width={45} />
+            <Results
+              score={score}
+              matchedSkills={matchedSkills}
+              missingSkills={missingSkills}
+            />
           </>
         )}
       </section>
