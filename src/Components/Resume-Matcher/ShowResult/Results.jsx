@@ -1,7 +1,7 @@
 import SkillShowcase from "./SkillShowcase";
 import Visualization from "./Visualization";
 
-const Results = () => {
+const Results = ({ score, matchedSkills, missingSkills }) => {
   return (
     <>
       <div className="mt-5">
@@ -19,15 +19,30 @@ const Results = () => {
           <div className="xl:ml-20 px-8 sm:px-8 md:px-12 lg:px-15 py-6 bg-black text-white rounded-3xl border-4 border-blue-500">
             <p className="capitalize text-center text-2xl md:text-[32px] lg:text-4xl xl:text-3xl font-bold">
               <span className="font-extrabold mr-3 lg:text-4xl xl:text-3xl text-blue-500 ">
-                75%
+                {score}%
               </span>{" "}
               <span>complement</span>
             </p>
+
+            <div className="mt-4 h-2 w-full rounded-full bg-gray-200">
+              <div
+                className="h-2 rounded-full bg-blue-500"
+                style={{ width: `${score}%` }}
+              />
+            </div>
           </div>
         </div>
       </div>
-      <SkillShowcase />
-      <Visualization />
+      <SkillShowcase
+        matchedSkills={matchedSkills}
+        missingSkills={missingSkills}
+      />
+      <div className="min-w-0">
+        <Visualization
+          matchedSkills={matchedSkills}
+          missingSkills={missingSkills}
+        />
+      </div>
     </>
   );
 };
