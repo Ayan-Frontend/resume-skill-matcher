@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 const Visualization = ({ matchedSkills, missingSkills }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
   const matchedCount = matchedSkills.length;
   const missingCount = missingSkills.length;
 
@@ -8,6 +11,14 @@ const Visualization = ({ matchedSkills, missingSkills }) => {
     { name: "Matched", value: matchedCount },
     { name: "Missing", value: missingCount },
   ];
+
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 640);
+    checkScreen();
+
+    window.addEventListener("resize", checkScreen);
+    return () => window.addEventListener("resize", checkScreen);
+  }, []);
 
   const COLORS = ["#3B82F6", "#EF4444"]; // blue, red
 
@@ -27,15 +38,15 @@ const Visualization = ({ matchedSkills, missingSkills }) => {
           demonstratation of scores
         </p>
       </div>
-      <div className="mt-6 w-full min-w-0 h-90">
+      <div className="mt-6 w-full min-w-0 h-95 sm:h-90">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={data}
               dataKey="value"
               nameKey="name"
-              outerRadius="80%"
-              label={renderLabel}
+              outerRadius={isMobile ? "80%" : "85%"}
+              label={!isMobile ? renderLabel : false}
               labelLine={false}
             >
               {data.map((entry, index) => (
@@ -46,15 +57,16 @@ const Visualization = ({ matchedSkills, missingSkills }) => {
           </PieChart>
         </ResponsiveContainer>
       </div>
+
       {/* Small Legend */}
-      <div className="mt-4 flex justify-center gap-6 text-sm font-semibold">
-        <div className="flex items-center gap-2">
+      <div className="mt-4 flex justify-center gap-6 md:text-xl font-semibold">
+        <div className="flex font-semibold items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-green-500"></span>
-          Matched: {matchedCount}
+          Matched: <span className="font-bold">{matchedCount}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="h-3 w-3 rounded-full bg-red-500"></span>
-          Missing: {missingCount}
+          Missing: <span className="font-bold">{missingCount}</span>
         </div>
       </div>
     </div>
